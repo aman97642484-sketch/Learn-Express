@@ -1,15 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-    <div class="main bg-zinc-900 h-screen w-screen flex items-center justify-center">
-        <h1 class="text-4xl text-white">Hello World</h1>
 
+<body>
+    <div class="main bg-zinc-900 h-screen w-screen">
+        <h1 class="text-3xl font-bold text-center text-white pt-10">Task Manager</h1>
+        <div class="form text-white  gap-4 p-10">
+            <form class="text flex flex-col flex-wrap" action="/create" method="POST">
+                <input class="bg-zinc-700 px-4 py-2 rounded-md outline-none border-solid" type="text" name="title" placeholder="ADD TITLE">
+                <textarea class="bg-zinc-700 px-4 py-2 rounded-md mt-4 outline-none resize-none"
+                    placeholder="ADD DESCRIPTION" name="description"></textarea>
+                <button
+                    class="text-start mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-32"
+                    type="submit">ADD TASK</button>
+            </form>
+        </div>
+        <div class="tasks p-10 flex flex-wrap gap-4">
+            <% if(files.length > 0) { %>
+                <% files.forEach(function(val){ %>
+                    <div class="task w-72 bg-zinc-800 text-white p-4 rounded mb-4">
+                        <h2 class="text-xl font-bold"><%= val %></h2>
+                        <a href="/files/<%= val %>" class="inline-block mt-2 text-blue-400 hover:text-blue-300">Read More</a>
+                    </div>
+                    <% }) %>
+                        <% } else { %>
+                            <h2 class="text-2xl font-bold text-center text-white">No Tasks Found</h2>
+                            <% } %>
+        </div>
     </div>
 </body>
+
 </html>
