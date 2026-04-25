@@ -25,6 +25,10 @@ app.get("/files/:filename", (req, res) => {
   });
 });
 
+app.get("/edit/:filename", (req, res) => {
+  res.render("edit", { title: req.params.filename });
+});
+
 app.post("/create", (req, res) => {
   fs.writeFile(
     `./files/${req.body.title.split(" ").join("-")}.txt`,
@@ -33,6 +37,12 @@ app.post("/create", (req, res) => {
       res.redirect("/");
     },
   );
+});
+
+app.post("/edit", (req, res) => {
+  fs.rename( `./files/${req.body.previous}` , `./files/${req.body.new}` , function(err) {
+    res.redirect("/");
+  });
 });
 
 app.listen(3000);
